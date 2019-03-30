@@ -1,5 +1,7 @@
+# 基本镜像 这个跑不起来
 FROM dockerfile/ubuntu
 
+# 执行命令
 RUN \
   add-apt-repository -y ppa:nginx/stable \
   && apt-get update \
@@ -8,8 +10,10 @@ RUN \
   && echo "\n daemon off;" >> /etc/nginx/nginx.conf \
   && chown -R www-data:www-data /var/lib/nginx
 
+# 开放存储卷
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
+# 设置工作目录
 WORKDIR /etc/nginx
 
 CMD ["nginx"]

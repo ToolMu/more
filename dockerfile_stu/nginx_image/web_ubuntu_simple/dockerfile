@@ -1,13 +1,17 @@
+# 基本镜像
 FROM ubuntu:16.04
 
+# 执行命令
 RUN apt-get update \
     && apt-get install -y nginx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && echo "daemon off;" >> /etc/nginx/nginx.conf
 
+# 添加相关文件到进行中 （未提供相关default数据）
 ADD default /etc/nginx/sites-available/default
 
+# 开放端口
 EXPOSE 80
 
 CMD ["nginx"]
